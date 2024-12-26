@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Dashboard</h2>
+        <div class="profile">
+            <div class="profile-pic">
+                <img id="profileImage" src="default-avatar.jpg" alt="Profile Image">
+                <input type="file" id="avatar" style="display:none" onchange="updateProfilePic(event)">
+                <button onclick="document.getElementById('avatar').click()">Change Avatar</button>
+            </div>
+            <div class="profile-info">
+                <label for="displayName">Display Name:</label>
+                <input type="text" id="displayName" placeholder="Enter your name">
+                <button onclick="saveDisplayName()">Save</button>
+            </div>
+        </div>
+
+        <div class="links">
+            <label for="site1">Site 1 Link:</label>
+            <input type="url" id="site1" placeholder="Enter Site 1 URL">
+            <button onclick="saveSiteLink('site1')">Save</button>
+
+            <label for="site2">Site 2 Link:</label>
+            <input type="url" id="site2" placeholder="Enter Site 2 URL">
+            <button onclick="saveSiteLink('site2')">Save</button>
+        </div>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
