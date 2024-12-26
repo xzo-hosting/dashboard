@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <h2>Dashboard</h2>
+        <h2>Welcome, <span id="currentUser"></span></h2>
+        
         <div class="profile">
             <div class="profile-pic">
                 <img id="profileImage" src="default-avatar.jpg" alt="Profile Image">
@@ -22,19 +23,55 @@
             </div>
         </div>
 
-        <div class="links">
-            <label for="site1">Site 1 Link:</label>
-            <input type="url" id="site1" placeholder="Enter Site 1 URL">
-            <button onclick="saveSiteLink('site1')">Save</button>
-
-            <label for="site2">Site 2 Link:</label>
-            <input type="url" id="site2" placeholder="Enter Site 2 URL">
-            <button onclick="saveSiteLink('site2')">Save</button>
-        </div>
-
         <button onclick="logout()">Logout</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Verificar si el usuario está logueado
+        if (!sessionStorage.getItem('loggedIn')) {
+            window.location.href = 'index.html';  // Si no está logueado, redirigir al login
+        }
+
+        // Cargar los datos del usuario desde sessionStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = sessionStorage.getItem('currentUser');
+            document.getElementById('currentUser').textContent = currentUser;
+
+            // Establecer los valores por defecto para el nombre de usuario y foto
+            document.getElementById('displayName').value = currentUser;  // Por defecto, nombre es el username
+            document.getElementById('profileImage').src = 'default-avatar.jpg';  // Foto de perfil por defecto
+        });
+
+        // Función para guardar el nombre de visualización
+        function saveDisplayName() {
+            const displayName = document.getElementById('displayName').value;
+            const currentUser = sessionStorage.getItem('currentUser');
+
+            // Mostrar el nombre en la pantalla
+            document.getElementById('currentUser').textContent = displayName;
+            alert('Display name saved!');
+        }
+
+        // Función para actualizar la foto de perfil
+        function updateProfilePic(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgUrl = e.target.result;
+                    document.getElementById('profileImage').src = imgUrl;
+                    alert('Profile picture updated!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Función de logout
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'index.html';  // Redirigir al login
+        }
+    </script>
 </body>
 </html>
