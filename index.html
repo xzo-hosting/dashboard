@@ -28,21 +28,22 @@
         const predefinedUser = { username: 'test', password: 'ASD9174' };
 
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault();  // Evitar que el formulario se envíe de la forma tradicional
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             // Verificar las credenciales
             if (username === predefinedUser.username && password === predefinedUser.password) {
+                // Almacenar la sesión del usuario
                 sessionStorage.setItem('loggedIn', true);
                 sessionStorage.setItem('currentUser', username);  // Guardar el usuario actual
                 window.location.href = 'dashboard.html';  // Redirigir al dashboard
             } else {
-                document.getElementById('errorMessage').style.display = 'block';  // Mostrar mensaje de error
+                // Mostrar mensaje de error si las credenciales son incorrectas
+                document.getElementById('errorMessage').style.display = 'block';
             }
         });
     </script>
 </body>
 </html>
-
