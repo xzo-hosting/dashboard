@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>User Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="login-container">
-        <h2>Admin Login</h2>
+        <h2>User Login</h2>
         <form id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -24,8 +24,8 @@
     </div>
 
     <script>
-        const correctUsername = 'admin';  // Cambia este valor
-        const correctPassword = 'admin123';  // Cambia este valor
+        // Usuario y contraseña predefinidos para pruebas
+        const predefinedUser = { username: 'test', password: 'ASD9174' };
 
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -33,14 +33,16 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === correctUsername && password === correctPassword) {
-                // Guardar la sesión y redirigir al dashboard
+            // Verificar las credenciales
+            if (username === predefinedUser.username && password === predefinedUser.password) {
                 sessionStorage.setItem('loggedIn', true);
-                window.location.href = 'dashboard.html'; 
+                sessionStorage.setItem('currentUser', username);  // Guardar el usuario actual
+                window.location.href = 'dashboard.html';  // Redirigir al dashboard
             } else {
-                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'block';  // Mostrar mensaje de error
             }
         });
     </script>
 </body>
 </html>
+
